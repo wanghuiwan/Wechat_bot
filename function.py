@@ -5,6 +5,7 @@ import itchat
 import requests
 import  time
 from random import choice
+from itchat.content import *
 KEY = '983eb78b67a046cd9b2f8c58b9751d8a'
 from yuliao import a
 # db_host = "47.91.228.122"
@@ -47,7 +48,10 @@ from yuliao import a
 #     except:
 #         return
 
-@itchat.msg_register('Text')
+
+
+
+@itchat.msg_register(TEXT)
 def text_reply(msg):
     try:
         aa = choice(a[msg['Content']])
@@ -64,7 +68,23 @@ def text_reply(msg):
         print(msg['Content'])
         # 当消息不是由自己发出的时候
         return u"[我是机器人小渣渣：]{}".format('你说的对，%s真的是猪^(*￣(oo)￣)^' % msg['Content'][:-2])
+    elif msg['Content']=='help':
+        data='回复:help  展示命令帮助' \
+             '回复:已有指令 可以进行对答' \
+             '回复:XX是猪 回复你说的对，%s真的是猪^(*￣(oo)￣)^' \
+             ''
+        return u"[我是机器人小渣渣：]{}".format('%s' % data)
+    else:
+        try:
+            aa = choice(a[msg['Content']])
+            return aa
+        except:
+            # 当消息不是由自己发出的时候
+            # return u"[我是渣男的机器人小渣渣：正在测试自动机器人]{}".format('.')
+            # 回复给好友
+            pass
 
-if __name__ == '__main__':
-    itchat.auto_login(enableCmdQR=2)#enablecmdqr参数是用于在命令行上生成二维码，用于linux服务器
-    itchat.run(debug=True)
+# if __name__ == '__main__':
+#     itchat.auto_login(enableCmdQR=2)#enablecmdqr参数是用于在命令行上生成二维码，用于linux服务器
+itchat.auto_login(enableCmdQR=2,hotReload=True)
+itchat.run(debug=True)
