@@ -75,7 +75,7 @@ def text_reply(msg):
         # '回复:xx市天气或者xx市xx区天气或者xx(市)天气  会回复该市当天天气\n' \
         # '例如: 北京市天气,北京天气,北京市朝阳区天气\n' \
         # '回复:XX是猪 回复你说的对，%s真的是猪^(*￣(oo)￣)^' \
-        return u"[我是机器人小渣渣：]{}".format('%s' % data)
+        return u"[I'm a robot: little slag：]{}".format('%s' % data)
     try:
         aa = choice(a[msg['Content']])
         return aa
