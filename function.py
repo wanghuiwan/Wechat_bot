@@ -56,22 +56,21 @@ import requests
 @itchat.msg_register(TEXT)
 def text_reply(msg):
     if msg['Content'] == 'help':
-        data = '\n回复:help  展示命令帮助\n' \
-               '回复:已有指令 可以进行对答\n' \
-               '查询天气：msg=天气深圳\n' \
-               '查询中英翻译：msg=翻译i love you\n' \
-               '查询智能聊天：msg=你好\n' \
-               '查询笑话：msg=笑话\n' \
-               '查询歌词⑴：msg=歌词后来\n' \
-               '查询歌词⑵：msg=歌词后来-刘若英\n' \
-               '查询计算⑴：msg=计算1+1*2/3-4\n' \
-               '查询计算⑵：msg=1+1*2/3-4\n' \
-               '查询ＩＰ⑴：msg=归属127.0.0.1\n' \
-               '查询ＩＰ⑵(暂时不支持)：msg=127.0.0.1\n' \
-               '查询手机⑴：msg=归属13430108888\n' \
-               '查询手机⑵：msg=13430108888\n' \
-               '查询成语查询：msg=成语一生一世\n' \
-               '查询五笔/拼音：msg=好字的五笔/拼音\n' \
+        data = '\nReply message:help  Show command help\n' \
+               'Query weather：msg=天气深圳\n' \
+               'Query Chinese English translation：msg=翻译i love you\n' \
+               'Query intelligent chat：msg=你好\n' \
+               'Query jokes：msg=笑话\n' \
+               'Query lyrics⑴：msg=歌词后来\n' \
+               'Query lyrics⑵：msg=歌词后来-刘若英\n' \
+               'Query calculation⑴：msg=计算1+1*2/3-4\n' \
+               'Query calculation⑵：msg=1+1*2/3-4\n' \
+               'Query IP⑴：msg=归属127.0.0.1\n' \
+               'Query IP⑵(Not supported at the moment)：msg=127.0.0.1\n' \
+               'Query mobile phone⑴：msg=归属13430108888\n' \
+               'Query mobile phone⑵：msg=13430108888\n' \
+               'Idiom query：msg=成语一生一世\n' \
+               'Query Wubi / Pinyin：msg=好字的五笔/拼音\n' \
                ''
         # '回复:xx市天气或者xx市xx区天气或者xx(市)天气  会回复该市当天天气\n' \
         # '例如: 北京市天气,北京天气,北京市朝阳区天气\n' \
@@ -93,7 +92,7 @@ def text_reply(msg):
     msg = msg['Content']
     # 当回复是XXXX是猪时会回复信息.趣味.
     if msg[-2:] =='是猪':
-        return u"[我是机器人小渣渣：]{}".format('你说的对，%s真的是猪^(*￣(oo)￣)^' % msg[:-2])
+        return u"[I'm a robot: little slag:]\n{}".format('你说的对，%s真的是猪^(*￣(oo)￣)^' % msg[:-2])
     # 如果结尾是天气的会根据规则截取并返回天气信息
     elif msg[-2:] =='天气':
         msg = msg[0:-2]
@@ -121,28 +120,27 @@ def text_reply(msg):
         return msgs
     # 增加帮助指令.涵盖可以使用的命令
     elif msg=='help':
-
-        data='\n回复:help  展示命令帮助\n' \
-             '回复:已有指令 可以进行对答\n' \
-             '回复:xx市天气或者xx市xx区天气或者xx(市)天气  会回复该市当天天气\n' \
-             '例如: 北京市天气,北京天气,北京市朝阳区天气\n' \
-             '回复:XX是猪 回复你说的对，%s真的是猪^(*￣(oo)￣)^' \
-             '查询天气：msg=天气深圳\n' \
-             '查询中英翻译：msg=翻译i love you\n' \
-             '查询智能聊天(暂时不支持)：msg=你好\n' \
-             '查询笑话：msg=笑话\n' \
-             '查询歌词⑴：msg=歌词后来\n' \
-             '查询歌词⑵：msg=歌词后来-刘若英\n' \
-             '查询计算⑴：msg=计算1+1*2/3-4\n' \
-             '查询计算⑵(暂时不支持)：msg=1+1*2/3-4\n' \
-             '查询ＩＰ⑴：msg=归属127.0.0.1\n' \
-             '查询ＩＰ⑵(暂时不支持)：msg=127.0.0.1\n' \
-             '查询手机⑴：msg=归属13430108888\n' \
-             '查询手机⑵(暂时不支持)：msg=13430108888\n' \
-             '查询成语查询：msg=成语一生一世\n' \
-             '查询五笔/拼音：msg=好字的五笔/拼音\n' \
-             ''
-        return u"[我是机器人小渣渣：]{}".format('%s' % data)
+        data='\nReply message:XX是猪 回复你说的对，%s真的是猪^(*￣(oo)￣)^\n' \
+               'Reply message:help  Show command help\n' \
+               'Query weather：msg=天气深圳\n' \
+               'Query Chinese English translation：msg=翻译i love you\n' \
+               'Query intelligent chat：msg=你好\n' \
+               'Query jokes：msg=笑话\n' \
+               'Query lyrics⑴：msg=歌词后来\n' \
+               'Query lyrics⑵：msg=歌词后来-刘若英\n' \
+               'Query calculation⑴：msg=计算1+1*2/3-4\n' \
+               'Query calculation⑵：msg=1+1*2/3-4\n' \
+               'Query IP⑴：msg=归属127.0.0.1\n' \
+               'Query IP⑵(Not supported at the moment)：msg=127.0.0.1\n' \
+               'Query mobile phone⑴：msg=归属13430108888\n' \
+               'Query mobile phone⑵：msg=13430108888\n' \
+               'Idiom query：msg=成语一生一世\n' \
+               'Query Wubi / Pinyin：msg=好字的五笔/拼音\n' \
+               ''
+            # '回复:已有指令 可以进行对答\n' \
+            # '回复:xx市天气或者xx市xx区天气或者xx(市)天气  会回复该市当天天气\n' \
+            # '例如: 北京市天气,北京天气,北京市朝阳区天气\n' \
+        return u"[I'm a robot: little slag：]\n{}".format('%s' % data)
     else:
         try:
             aa = choice(a[msg])
