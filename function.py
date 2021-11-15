@@ -75,7 +75,7 @@ def text_reply(msg):
         # '回复:xx市天气或者xx市xx区天气或者xx(市)天气  会回复该市当天天气\n' \
         # '例如: 北京市天气,北京天气,北京市朝阳区天气\n' \
         # '回复:XX是猪 回复你说的对，%s真的是猪^(*￣(oo)￣)^' \
-        return u"[I'm a robot: little slag：]{}".format('%s' % data)
+        return u"I'm a robot: little slag：\n{}".format('%s' % data)
     try:
         aa = choice(a[msg['Content']])
         return aa
@@ -92,7 +92,7 @@ def text_reply(msg):
     msg = msg['Content']
     # 当回复是XXXX是猪时会回复信息.趣味.
     if msg[-2:] =='是猪':
-        return u"[I'm a robot: little slag:]\n{}".format('你说的对，%s真的是猪^(*￣(oo)￣)^' % msg[:-2])
+        return u"I'm a robot: little slag:\n{}".format('你说的对，%s真的是猪^(*￣(oo)￣)^' % msg[:-2])
     # 如果结尾是天气的会根据规则截取并返回天气信息
     elif msg[-2:] =='天气':
         msg = msg[0:-2]
@@ -140,7 +140,7 @@ def text_reply(msg):
             # '回复:已有指令 可以进行对答\n' \
             # '回复:xx市天气或者xx市xx区天气或者xx(市)天气  会回复该市当天天气\n' \
             # '例如: 北京市天气,北京天气,北京市朝阳区天气\n' \
-        return u"[I'm a robot: little slag：]\n{}".format('%s' % data)
+        return u"I'm a robot: little slag：\n{}".format('%s' % data)
     else:
         try:
             aa = choice(a[msg])
