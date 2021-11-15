@@ -124,16 +124,16 @@ def text_reply(msg):
                'Reply message:help  Show command help\n' \
                'Query weather：msg=天气深圳\n' \
                'Query Chinese English translation：msg=翻译i love you\n' \
-               'Query intelligent chat：msg=你好\n' \
+               'Query intelligent chat(Not supported at the moment)：msg=你好\n' \
                'Query jokes：msg=笑话\n' \
                'Query lyrics⑴：msg=歌词后来\n' \
                'Query lyrics⑵：msg=歌词后来-刘若英\n' \
                'Query calculation⑴：msg=计算1+1*2/3-4\n' \
-               'Query calculation⑵：msg=1+1*2/3-4\n' \
+               'Query calculation⑵(Not supported at the moment)：msg=1+1*2/3-4\n' \
                'Query IP⑴：msg=归属127.0.0.1\n' \
                'Query IP⑵(Not supported at the moment)：msg=127.0.0.1\n' \
                'Query mobile phone⑴：msg=归属13430108888\n' \
-               'Query mobile phone⑵：msg=13430108888\n' \
+               'Query mobile phone⑵(Not supported at the moment)：msg=13430108888\n' \
                'Idiom query：msg=成语一生一世\n' \
                'Query Wubi / Pinyin：msg=好字的五笔/拼音\n' \
                ''
