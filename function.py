@@ -6,6 +6,18 @@ import requests
 import  time
 from random import choice
 from itchat.content import *
+# 参数	类型	Text键值
+# TEXT	文本	文本内容
+# MAP	地图	位置文本
+# CARD	名片	推荐人字典
+# NOTE	通知	通知文本
+# SHARING	分享	分享名称
+# PICTURE	图片/表情	下载方法
+# RECORDING	语音	下载方法
+# ATTACHMENT	附件	下载方法
+# VIDEO	小视屏	下载方法
+# FRIENGDS	好友邀请	添加好友所需参数
+# SYSTEM	系统消息	更新内容的用户或群聊的UserName组成的列表
 KEY = '983eb78b67a046cd9b2f8c58b9751d8a'
 from yuliao import a
 from city_code2 import city_code2
@@ -77,11 +89,12 @@ def text_reply(msg):
         # '回复:XX是猪 回复你说的对，%s真的是猪^(*￣(oo)￣)^' \
         return u"I'm a robot: little slag：\n{}".format('%s' % data)
     try:
-        aa = choice(a[msg['Content']])
-        return aa
-    except:
         msgs = qingyunkeApi(msg)
         return msgs
+
+    except:
+        aa = choice(a[msg['Content']])
+        return aa
         # 当消息不是由自己发出的时候
         # return u"[我是机器人小渣渣：正在测试机器人]{}".format('.')
         # 回复给好友
@@ -151,6 +164,20 @@ def text_reply(msg):
             # 回复给好友
             pass
 
+@itchat.msg_register(NOTE,isGroupChat=True)
+def text_reply(msg):
+    print('note msg')
+    print(msg)
+
+
+
+@itchat.msg_register(SYSTEM,isGroupChat=True)
+def text_reply(msg):
+    print('system msg')
+    print(msg)
+
+
+
 
 def qingyunkeApi(msg):
     url = 'http://api.qingyunke.com/api.php?key=free&appid=0&msg=%s'
@@ -177,6 +204,15 @@ def get_weather(city,qu):
           ' 日落时间为:' + msgs['data']['forecast'][0]['sunset'] + '\n' + \
           ' PS:' + msgs['data']['forecast'][0]['notice'] + '\n'
     return msg
+
+
+def juhe_xingzuo(msg):
+    url = 'http://web.juhe.cn/constellation/getAll?consName=%s&type=today&key=%s'
+    aaa = requests.get(url % msg)
+    print(aaa.json())
+    msgs = aaa.json()['content'].replace('{br}','\n')
+    return msgs
+
 
 if __name__ == '__main__':
     #     #     itchat.auto_login(enableCmdQR=2)#enablecmdqr参数是用于在命令行上生成二维码，用于linux服务器

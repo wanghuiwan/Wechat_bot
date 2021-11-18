@@ -7,7 +7,6 @@ __author__ = 'Martin Wang <357951@qq.com>'
 
 import pymysql
 import sqlite3
-from telebot import types
 from time import sleep
 
 db_host = "47.91.228.122"
