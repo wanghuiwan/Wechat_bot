@@ -1,9 +1,10 @@
 #!/usr/bin/python
 #coding=utf8
+import threading
+
 import itchat
 # import pymysql
 import requests
-import  time
 from random import choice
 from itchat.content import *
 # 参数	类型	Text键值
@@ -18,10 +19,12 @@ from itchat.content import *
 # VIDEO	小视屏	下载方法
 # FRIENGDS	好友邀请	添加好友所需参数
 # SYSTEM	系统消息	更新内容的用户或群聊的UserName组成的列表
-KEY = '983eb78b67a046cd9b2f8c58b9751d8a'
 from yuliao import a
+from third_api import *
+
+from conn_mysql import *
+from apscheduler.schedulers.blocking import BlockingScheduler
 from city_code2 import city_code2
-import requests
 # db_host = "47.91.228.122"
 # db_name = "bot"
 # db_user = "root"
@@ -177,46 +180,44 @@ def text_reply(msg):
     print(msg)
 
 
+def send(type,nickname):
+    datasssss = tianxing(type)
+
+    chat_rooms = itchat.search_chatrooms(name=nickname)
+    print(chat_rooms[0]['UserName'])
+    if datasssss['types']=='txt':
+        itchat.send_msg(datasssss["msg"], toUserName=chat_rooms[0]['UserName'])
+    elif datasssss['types']=='img':
+        itchat.send_image(datasssss["msg1"], toUserName=chat_rooms[0]['UserName'])
+        itchat.send_msg(datasssss["msg2"], toUserName=chat_rooms[0]['UserName'])
+        itchat.send_msg(datasssss["msg3"], toUserName=chat_rooms[0]['UserName'])
+    else:
+        pass
+def sends(chatroomUserName,type):
+    datasssss = tianxing(type)
+    itchat.send(datasssss, toUserName=chatroomUserName)
 
 
-def qingyunkeApi(msg):
-    url = 'http://api.qingyunke.com/api.php?key=free&appid=0&msg=%s'
-    aaa = requests.get(url % msg)
-    print(aaa.json())
-    msgs = aaa.json()['content'].replace('{br}','\n')
-    return msgs
+def after_login():
+    datas = connmysql("SELECT type,datetimes,room_name,nickname FROM wechat_job WHERE status = 1")
+    for data in datas:
+        nickname = data[3]
+        type = data[0]
+        if type == 1 or type ==3 or type == 4:
+            sched.add_job(send, 'cron', hour=data[1],minute=0,second=1,kwargs={'type':type,'nickname':nickname})
+        elif type == 2:
+            sched.add_job(send, 'interval', seconds=data[1],kwargs={'type':type,'nickname':nickname})
+        else:
+            pass
+    sched.start()
 
 
-def get_weather(city,qu):
-    # 天气接口获取当天的天气信息
-    url = 'http://t.weather.itboy.net/api/weather/city/%s'
-    #获取地区code
-    aa = city_code2[city][qu]['city_code']
-    print(url % aa)
-    aaa = requests.get(url % aa)
-    msgs = aaa.json()
-    msg = '本次数据更新时间为:' + msgs['cityInfo']['updateTime'] + '\n' + \
-          ' 今天:' + msgs['data']['forecast'][0]['fx'] + msgs['data']['forecast'][0]['fl'] + msgs['data']['forecast'][0][
-              'type'] + '\n' + \
-          ' 今天最高气温:' + msgs['data']['forecast'][0]['high'] + '\n' + \
-          ' 今天最低气温:' + msgs['data']['forecast'][0]['low'] + '\n' + \
-          ' 日出时间为:' + msgs['data']['forecast'][0]['sunrise'] + '\n' + \
-          ' 日落时间为:' + msgs['data']['forecast'][0]['sunset'] + '\n' + \
-          ' PS:' + msgs['data']['forecast'][0]['notice'] + '\n'
-    return msg
-
-
-def juhe_xingzuo(msg):
-    url = 'http://web.juhe.cn/constellation/getAll?consName=%s&type=today&key=%s'
-    aaa = requests.get(url % msg)
-    print(aaa.json())
-    msgs = aaa.json()['content'].replace('{br}','\n')
-    return msgs
+def after_logout():
+    sched.shutdown()
 
 
 if __name__ == '__main__':
-    #     #     itchat.auto_login(enableCmdQR=2)#enablecmdqr参数是用于在命令行上生成二维码，用于linux服务器
-    #     itchat.auto_login(enableCmdQR=2)
-    #     itchat.run(debug=True)
-    itchat.auto_login(enableCmdQR=False)
+    #     itchat.auto_login(enableCmdQR=2)#enablecmdqr参数是用于在命令行上生成二维码，用于linux服务器
+    sched = BlockingScheduler()
+    itchat.auto_login(enableCmdQR=True,loginCallback=after_login, exitCallback=after_logout)
     itchat.run(debug=True)

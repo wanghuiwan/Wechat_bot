@@ -10,11 +10,34 @@ import sqlite3
 from time import sleep
 
 db_host = "47.91.228.122"
-db_name = "yuliaoku"
+db_name = "wechat_bot"
 db_user = "root"
-db_pass = "123456"
+db_pass = "-CF2.AA$evYv6/:}"
 db_port = 3306
 
+
+def connmysql(sql):
+
+    db = pymysql.connect(host=db_host,
+                         user=db_user,
+                         password=db_pass,
+                         database=db_name)
+
+    # 使用 cursor() 方法创建一个游标对象 cursor
+    cursor = db.cursor()
+
+    # 使用 execute()  方法执行 SQL 查询
+    cursor.execute(sql)
+
+    # 使用 fetchone() 方法获取全部数据.
+    data = cursor.fetchall()
+    # print(data)
+
+    # print("Database version : %s " % data)
+
+    # 关闭数据库连接
+    db.close()
+    return data
 # Creating a database with tables if not exists.
 # db = pymysql.connect(host=db_host, database=db_name, user=db_user, password=db_pass, port=db_port, charset='utf8')
 # curs = db.cursor()
