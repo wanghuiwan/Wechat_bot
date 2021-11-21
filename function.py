@@ -188,7 +188,10 @@ def send(type,nickname):
     if datasssss['types']=='txt':
         itchat.send_msg(datasssss["msg"], toUserName=chat_rooms[0]['UserName'])
     elif datasssss['types']=='img':
-        itchat.send_image(datasssss["msg1"], toUserName=chat_rooms[0]['UserName'])
+        r = requests.get(datasssss["msg1"])
+        with open('./img/everyday.png', 'wb') as f:
+            f.write(r.content)
+        itchat.send_image('./img/everyday.png', toUserName=chat_rooms[0]['UserName'])
         itchat.send_msg(datasssss["msg2"], toUserName=chat_rooms[0]['UserName'])
         itchat.send_msg(datasssss["msg3"], toUserName=chat_rooms[0]['UserName'])
     else:
