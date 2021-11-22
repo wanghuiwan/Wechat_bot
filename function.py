@@ -23,7 +23,8 @@ from yuliao import a
 from third_api import *
 
 from conn_mysql import *
-from apscheduler.schedulers.blocking import BlockingScheduler
+# from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 from city_code2 import city_code2
 # db_host = "47.91.228.122"
 # db_name = "bot"
@@ -196,9 +197,6 @@ def send(type,nickname):
         itchat.send_msg(datasssss["msg3"], toUserName=chat_rooms[0]['UserName'])
     else:
         pass
-def sends(chatroomUserName,type):
-    datasssss = tianxing(type)
-    itchat.send(datasssss, toUserName=chatroomUserName)
 
 
 def after_login():
@@ -221,6 +219,6 @@ def after_logout():
 
 if __name__ == '__main__':
     #     itchat.auto_login(enableCmdQR=2)#enablecmdqr参数是用于在命令行上生成二维码，用于linux服务器
-    sched = BlockingScheduler()
+    sched = BackgroundScheduler(timezone="Asia/Harbin")
     itchat.auto_login(enableCmdQR=2,loginCallback=after_login, exitCallback=after_logout)
     itchat.run(debug=True)
