@@ -221,6 +221,6 @@ def after_logout():
 
 if __name__ == '__main__':
     #     itchat.auto_login(enableCmdQR=2)#enablecmdqr参数是用于在命令行上生成二维码，用于linux服务器
-    sched = BlockingScheduler(timezone="Asia/Shanghai")
+    sched = BlockingScheduler()
     itchat.auto_login(enableCmdQR=2,loginCallback=after_login, exitCallback=after_logout)
     itchat.run(debug=True)
