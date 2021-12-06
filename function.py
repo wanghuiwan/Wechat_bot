@@ -106,11 +106,14 @@ def text_reply(msg):
 
 @itchat.msg_register('Text',isGroupChat=True)
 def text_reply(msg):
+    from_user_name = msg['FromUserName']
     msg = msg['Content']
     # 当回复是XXXX是猪时会回复信息.趣味.
     if msg[-2:] =='是猪':
         return u"I'm a robot: little slag:\n{}".format('你说的对，%s真的是猪^(*￣(oo)￣)^' % msg[:-2])
     # 如果结尾是天气的会根据规则截取并返回天气信息
+    elif msg[:4] == '成语接龙':
+        tianxing(4,word=msg[4:],user_name = from_user_name)
     elif msg[-2:] =='天气':
         msg = msg[0:-2]
         try:
@@ -132,7 +135,8 @@ def text_reply(msg):
             msg = "回复:xx市天气或者xx市xx区天气或者xx(市)天气  会回复该市当天天气\n"
         return msg
     # 增加青云客智能Api
-    elif msg[:2]=='天气' or msg[:2] =='翻译' or msg[:2] =='笑话' or msg[:2] =='歌词' or msg[:2] =='计算' or msg[:2] =='归属'or msg[:2] =='成语' or msg[-5:] =='五笔/拼音':
+    elif msg[:2]=='天气' or msg[:2] =='翻译' or msg[:2] =='笑话' or msg[:2] =='歌词' or msg[:2] =='计算' or \
+            msg[:2] =='归属'or msg[:2] =='成语' or msg[-5:] =='五笔/拼音':
         msgs = qingyunkeApi(msg)
         return msgs
     # 增加帮助指令.涵盖可以使用的命令
@@ -220,5 +224,5 @@ def after_logout():
 if __name__ == '__main__':
     #     itchat.auto_login(enableCmdQR=2)#enablecmdqr参数是用于在命令行上生成二维码，用于linux服务器
     sched = BackgroundScheduler(timezone="Asia/Harbin")
-    itchat.auto_login(enableCmdQR=2,loginCallback=after_login, exitCallback=after_logout)
+    itchat.auto_login(hotReload=True,enableCmdQR=2,loginCallback=after_login, exitCallback=after_logout)
     itchat.run(debug=True)
