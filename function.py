@@ -1,10 +1,8 @@
 #!/usr/bin/python
 #coding=utf8
-import threading
 
 import itchat
 # import pymysql
-import requests
 from random import choice
 from itchat.content import *
 # 参数	类型	Text键值
@@ -20,12 +18,13 @@ from itchat.content import *
 # FRIENGDS	好友邀请	添加好友所需参数
 # SYSTEM	系统消息	更新内容的用户或群聊的UserName组成的列表
 from yuliao import a
-from third_api import *
+from function.third_api import *
 
-from conn_mysql import *
+from function.conn_mysql import *
 # from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.schedulers.background import BackgroundScheduler
-from city_code2 import city_code2
+
+
 # db_host = "47.91.228.122"
 # db_name = "bot"
 # db_user = "root"
@@ -65,8 +64,6 @@ from city_code2 import city_code2
 #         return r.get('text')
 #     except:
 #         return
-
-
 
 
 @itchat.msg_register(TEXT)
@@ -178,7 +175,6 @@ def text_reply(msg):
     print(msg)
 
 
-
 @itchat.msg_register(SYSTEM,isGroupChat=True)
 def text_reply(msg):
     print('system msg')
@@ -187,7 +183,6 @@ def text_reply(msg):
 
 def send(type,nickname):
     datasssss = tianxing(type)
-
     chat_rooms = itchat.search_chatrooms(name=nickname)
     print(chat_rooms[0]['UserName'])
     if datasssss['types']=='txt':

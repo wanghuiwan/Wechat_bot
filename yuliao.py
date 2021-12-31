@@ -1,4 +1,3 @@
-from conn_mysql import *
 a={
     '你好':['你也好！','你好'],
     '你是谁':['我是机器人小渣渣！', '我是小渣渣','陪你聊天的人！','小渣渣！'],
@@ -383,39 +382,3 @@ a={
     '凯尔特陆棚，是什么大陆的大陆架的一部分': ['欧洲'],
     '海豚使用的一种感觉，类似于声纳，以确定附近的物品的位置和形状.它是什么': ['回声定位']
 }
-# zizizi = {}
-# from city_code2 import *
-# print(city_code2['北京'])
-# url = 'http://t.weather.itboy.net/api/weather/city/%s'
-# import requests
-# aa = city_code2['北京']['北京']['city_code']
-# print(url % aa)
-# aaa = requests.get(url % aa)
-# print(aaa.json())
-# msgs = aaa.json()
-# print(msgs['data']['forecast'][0])
-# msg = '本次数据更新时间为:'+msgs['cityInfo']['updateTime'] + '\n' + \
-#         ' 今天:'+ msgs['data']['forecast'][0]['fx']+msgs['data']['forecast'][0]['fl']+ msgs['data']['forecast'][0]['type']+'\n' + \
-#         ' 今天最高气温:'+msgs['data']['forecast'][0]['high']+ '\n' + \
-#         ' 今天最低气温:'+ msgs['data']['forecast'][0]['low']+'\n' + \
-#         ' 日出时间为:'+ msgs['data']['forecast'][0]['sunrise']+'\n' + \
-#         ' 日落时间为:'+ msgs['data']['forecast'][0]['sunset']+'\n'  + \
-#         ' PS:'+ msgs['data']['forecast'][0]['notice']+'\n'
-#
-#
-# print(msg)
-
-# asdf=["北京市西城区天气",'天津市天气','北京天气','大连市思念天气']
-# for msg in asdf:
-#     if msg[-2:]=='天气':
-#         msg=msg[0:-2]
-#         try:
-#             city= msg.split('市')[0]
-#         except:
-#             city= msg.split('天气')[0]
-#         try:
-#             qu = msg.split('市')[1].split('区')[0]
-#
-#         except:
-#             qu=city
-#     print(city +qu)

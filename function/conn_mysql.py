@@ -6,14 +6,9 @@
 __author__ = 'Martin Wang <357951@qq.com>'
 
 import pymysql
-import sqlite3
 from time import sleep
+from config.config import *
 
-db_host = "47.91.228.122"
-db_name = "wechat_bot"
-db_user = "root"
-db_pass = "-CF2.AA$evYv6/:}"
-db_port = 3306
 
 
 def connmysql(sql):

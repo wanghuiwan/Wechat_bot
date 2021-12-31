@@ -2,7 +2,7 @@
 #coding=utf8
 from city_code2 import city_code2
 import requests
-
+from function.conn_mysql import *
 
 
 def qingyunkeApi(msg):
@@ -40,12 +40,13 @@ def juhe_xingzuo(msg):
     return msgs
 
 
-def tianxing(type):
+def tianxing(type,**kwargs):
     '''
-    :param type:int #1表示早安 2表示定时任务 3表示晚安
+    :param type:int #1表示早安 2表示定时任务 3表示晚安 4为成语接龙
     :param y:int
     :return: int
     '''
+    params = {'key': tianxingkey}
     if type ==1:
         #早安
         url = 'http://api.tianapi.com/zaoan/index'
@@ -55,10 +56,14 @@ def tianxing(type):
     elif type ==2:
         # 朋友圈文案
         url = 'http://api.tianapi.com/pyqwenan/index'
+    elif type == 4:
+        pass
+        url = 'http://api.tianapi.com/chengyujielong/index'
+        params = {}
     else:
         # 每日一句美好英语
         url = 'http://api.tianapi.com/everyday/index'
-    params = {'key': '4c1c67d037a124a623b829bb990a7b64'}
+
     headers = {'Content-type': 'application/x-www-form-urlencoded'}
     data = requests.get(url, params=params, headers=headers)
     data = data.json()
