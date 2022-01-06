@@ -2,7 +2,7 @@
 #coding=utf8
 from city_code2 import city_code2
 import requests
-from function.conn_mysql import *
+from functions.conn_mysql import *
 
 
 def qingyunkeApi(msg):

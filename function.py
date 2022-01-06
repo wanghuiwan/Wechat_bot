@@ -18,9 +18,9 @@ from itchat.content import *
 # FRIENGDS	好友邀请	添加好友所需参数
 # SYSTEM	系统消息	更新内容的用户或群聊的UserName组成的列表
 from yuliao import a
-from function.third_api import *
+from functions.third_api import *
 
-from function.conn_mysql import *
+from functions.conn_mysql import *
 # from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.schedulers.background import BackgroundScheduler
 
